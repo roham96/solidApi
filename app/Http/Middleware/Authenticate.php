@@ -3,6 +3,8 @@
 namespace App\Http\Middleware;
 
 use Illuminate\Auth\Middleware\Authenticate as Middleware;
+use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Http\Response;
 
 class Authenticate extends Middleware
 {
@@ -14,8 +16,13 @@ class Authenticate extends Middleware
      */
     protected function redirectTo($request)
     {
-        if (! $request->expectsJson()) {
-            return route('login');
+        if ($request->expectsJson()) {
+            throw new HttpResponseException(response()->json([
+                'error' => true,
+                'message' => 'Unauthorized.',
+            ], Response::HTTP_UNAUTHORIZED));
         }
+
+        return route('login');
     }
 }
