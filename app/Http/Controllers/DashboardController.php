@@ -13,5 +13,4 @@ class DashboardController extends Controller
         return DB::select(DB::raw("SELECT cast(".$request->q." as decimal( 65, 5 ))"))[0];
     }
 
-
 }
