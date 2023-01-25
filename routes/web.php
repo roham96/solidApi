@@ -14,3 +14,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::controller(DashboardController::class)->name("dashboard.")->group(
+    function () {
+            Route::get('/task1', 'task1')->name("task1");
+           
+        }
+);

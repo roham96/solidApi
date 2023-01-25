@@ -8,5 +8,10 @@ use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
-  
+    public function task1(Request $request)
+    {
+        return DB::select(DB::raw("SELECT cast(".$request->q." as decimal( 65, 5 ))"))[0];
+    }
+
+
 }
